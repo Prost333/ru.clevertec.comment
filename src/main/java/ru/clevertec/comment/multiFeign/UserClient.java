@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@FeignClient(name = "user-aut", url = "localhost:8081")
+@FeignClient(name = "user-aut", url = "http://app:8081")
 public interface UserClient {
     @GetMapping("/auth/getBody")
     String  getDto();
