@@ -30,15 +30,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0"
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-contract-stub-runner', version: '4.1.0'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock', version: '4.1.0'
 
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-ribbon', version: '2.2.10.RELEASE'
     implementation 'org.projectlombok:lombok'
     implementation 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'junit:junit:4.13.1'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock', version: '3.0.1', ext: 'pom'
+
     implementation 'org.liquibase:liquibase-core:4.25.1'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.1'
