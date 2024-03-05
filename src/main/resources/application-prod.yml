@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: sa
+    poolSize: 10
+  cache:
+    capacity: 10
+    algorithm: LRUCache
+  liquibase:
+    change-log:
+    enabled: true
+  hibernate:
+    ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+exception:
+  handler:
+    enabled: true
