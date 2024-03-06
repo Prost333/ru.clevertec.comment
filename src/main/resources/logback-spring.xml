@@ -1,0 +1,25 @@
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <property name="LOG_FILE" value="application.log"/>
+
+    <appender name="ColoredConsole"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %highlight(%-5level) %d{HH:mm:ss.SSS} [%thread] %cyan(%logger{15}) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RollingFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ColoredConsole" />
+        <appender-ref ref="RollingFile" />
+    </root>
+</configuration>
