@@ -27,7 +27,15 @@ import java.util.stream.Collectors;
 public class CommentServiceImp implements CommentService {
     private CommentMapper commentMapper;
     private CommentDao commentDao;
-
+    /**
+     * Saves a new comment.
+     *
+     * @param commentReq the comment request object
+     * @param userName the username of the user who created the comment
+     * @param newsId the ID of the news article the comment is associated with
+     * @return the saved comment response object
+     * @throws EntityNotFoundException if an error occurred while saving the comment
+     */
     @Override
     @Cache
     public CommentResp save(CommentReq commentReq, String userName, Long newsId) {
@@ -42,7 +50,13 @@ public class CommentServiceImp implements CommentService {
             throw new EntityNotFoundException("an error occurred");
         }
     }
-
+    /**
+     * Finds a comment by its ID.
+     *
+     * @param id the ID of the comment
+     * @return the found comment response object
+     * @throws EntityNotFoundException if no comment was found with the given ID
+     */
     @Override
     @Cache
     public CommentResp findById(Long id) {
@@ -53,7 +67,12 @@ public class CommentServiceImp implements CommentService {
             throw new EntityNotFoundException("Comment not found with id " + id);
         }
     }
-
+    /**
+     * Deletes a comment by its ID.
+     *
+     * @param id the ID of the comment
+     * @throws EntityNotFoundException if no comment was found with the given ID
+     */
     @Override
     @Cache
     public void delete(Long id) {
@@ -64,7 +83,14 @@ public class CommentServiceImp implements CommentService {
             throw new EntityNotFoundException("Comment not found with id " + id);
         }
     }
-
+    /**
+     * Finds all comments.
+     *
+     * @param page the page number
+     * @param pageSize the size of the page
+     * @return a page of found comment response objects
+     * @throws EntityNotFoundException if no comments were found
+     */
     @Override
     @Cache
     public Page<CommentResp> findAll(int page, int pageSize) {
@@ -74,12 +100,24 @@ public class CommentServiceImp implements CommentService {
         }
         return respPage;
     }
-
+    /**
+     * Searches for comments by a keyword.
+     *
+     * @param keyword the keyword to search for
+     * @param pageable the pagination information
+     * @return a page of found comment response objects
+     */
     @Override
     public Page<CommentResp> search(String keyword, Pageable pageable) {
         return commentDao.search(keyword, pageable).map(commentMapper::toResponse);
     }
-
+    /**
+     * Finds comments by a username.
+     *
+     * @param username the username to search for
+     * @return a list of found comment response objects
+     * @throws EntityNotFoundException if no comments were found for the given username
+     */
     @Override
     public List<CommentResp> findByUsername(String username) {
         Optional<List<Comment>> optionalComments = commentDao.findByUsername(username);
@@ -93,6 +131,12 @@ public class CommentServiceImp implements CommentService {
         }
     }
 
+    /**
+     * Finds comments by a news ID.
+     *
+     * @param id the ID of the news article
+     * @return a list of found comment response objects
+     */
     @Override
     public List<CommentResp> findByNews_Id(Long id) {
         List<Comment> commentList = commentDao.findByNewsId(id);
