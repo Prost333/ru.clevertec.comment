@@ -1,4 +1,0 @@
-rootProject.name = 'ru.clevertec.comment'
-include 'spring-boot-exeption-starter'
-include 'spring-boot-aop-starter'
-

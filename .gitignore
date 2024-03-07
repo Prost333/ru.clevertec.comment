@@ -1,9 +1,0 @@
-# Project exclude paths
-/.gradle/
-/build/
-/build/classes/java/main/
-/spring-boot-aop-starter/build/
-/spring-boot-aop-starter/build/classes/java/main/
-/spring-boot-exeption-starter/build/
-/spring-boot-exeption-starter/build/classes/java/main/
-/.idea/
