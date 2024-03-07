@@ -20,7 +20,9 @@ import org.slf4j.LoggerFactory;
 
 
 import javax.crypto.SecretKey;
-
+/**
+ * SecurityConfig class configures the security settings for the application.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,28 +30,51 @@ public class SecurityConfig {
     private String secretKey;
     @Autowired
     private ApplicationContext context;
-
+    /**
+     * Provides the SecretKey bean for JWT token generation and validation.
+     *
+     * @return The SecretKey bean.
+     */
     @Bean
     public SecretKey jwtSecretKey() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
 
-
+    /**
+     * Provides the JwtService bean for JWT token operations.
+     *
+     * @return The JwtService bean.
+     */
     @Bean
     public JwtService jwtService() {
         return new JwtService();
     }
-
+    /**
+     * Provides the UserClient bean for user-related operations.
+     *
+     * @return The UserClient bean.
+     */
     @Bean
     public UserClient userClient() {
         return context.getBean(UserClient.class);
     }
 
+    /**
+     * Provides the JwtTokenFilter bean for JWT token authentication.
+     *
+     * @return The JwtTokenFilter bean.
+     */
     @Bean
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter(secretKey,userClient());
     }
-
+    /**
+     * Configures HTTP security settings for the application.
+     *
+     * @param http The HttpSecurity instance to configure.
+     * @return The SecurityFilterChain instance.
+     * @throws Exception If an exception occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         Logger logger = LoggerFactory.getLogger(getClass());
